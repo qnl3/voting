@@ -1,0 +1,7 @@
+import { List, Map } from 'immutable';
+
+function vote(state, entry) {
+    return state.updateIn(['vote', 'tally', entry], 0, tally => tally + 1);
+}
+
+export default vote
