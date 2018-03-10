@@ -30,9 +30,9 @@ test('Action : setEntriesAction', actionTest(
     { type: 'voting-app/reducer/SET_ENTRIES', payload: { entries: ['Trainspotting','28 Days Later', 'Sunshine']}} 
 ));
 
-test('Action : voting-app/reducer/NEXT_ACTION', actionTest(
+test('Action : voting-app/reducer/NEXT', actionTest(
     nextAction,
-    { type: 'voting-app/reducer/NEXT_ACTION'} 
+    { type: 'voting-app/reducer/NEXT'} 
 ));
 
 test('Reducer : handles voting-app/reducer/SET_ENTRIES', reducerTest(
@@ -42,14 +42,14 @@ test('Reducer : handles voting-app/reducer/SET_ENTRIES', reducerTest(
     newEntries
 ));
 
-test('Reducer : handles voting-app/reducer/NEXT_ACTION with empty entries', reducerTest(
+test('Reducer : handles voting-app/reducer/NEXT with empty entries', reducerTest(
     reducer,
     initialState,
     nextAction(),
     Map({entries: List(),vote: Map({ pair: List()})})
 ));
 
-test('Reducer : handles voting-app/reducer/NEXT_ACTION with entries',reducerTest(
+test('Reducer : handles voting-app/reducer/NEXT with entries',reducerTest(
     reducer,
     newEntries,
     nextAction(),

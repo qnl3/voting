@@ -13,7 +13,7 @@ const voteAction = createAction('voting-app/reducer/VOTE', entry => ({entry}));
 //     'VOTE_ACTION':  entry => ({entry})
 // });
 
-const nextAction = createAction('voting-app/reducer/NEXT_ACTION');
+const nextAction = createAction('voting-app/reducer/NEXT');
 
 // Actions
 function setEntries(state, entries) {
