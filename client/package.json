@@ -4,7 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack --display-error-details",
+    "build:dev": "npm run build -- --mode development --config webpack.config.dev.js",
+    "serve": "webpack-dev-server --hot",
+    "serve:dev": "npm run serve --- --mode development",
+    "serve:dev:watch": "npm run start:dev --watch",
+    "test": "cross-env NODE_ENV=test ava",
+    "test:watch": "npm run test --watch"
   },
   "keywords": [],
   "author": "",
@@ -16,12 +22,32 @@
     "babel-loader": "^7.1.4",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
+    "babel-preset-react-app": "^3.1.1",
+    "babel-register": "^6.26.0",
+    "cross-env": "^5.1.4",
     "enzyme": "^3.3.0",
     "jdom": "^2.0.3",
+    "jsdom": "^11.6.2",
+    "react-hot-loader": "^4.0.0",
     "redux-ava": "^2.2.0",
     "redux-ava-immutable": "^2.1.0",
     "webpack": "^4.1.1",
     "webpack-cli": "^2.0.10",
-    "webpack-dev-server": "^3.1.0"
+    "webpack-dev-server": "^3.1.1"
+  },
+  "dependencies": {
+    "@ava/babel-preset-stage-4": "^1.1.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  },
+  "babel": {
+    "presets": "react-app"
+  },
+  "ava": {
+    "babel": "inherit",
+    "require": [
+      "babel-register",
+      "./test/helpers/jdom_test_helper.js"
+    ]
   }
 }

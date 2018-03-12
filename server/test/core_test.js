@@ -15,17 +15,16 @@ test ( "Application logic : setEntries : converts map to immutable", t => {
     const entries = ['Trainspotting', '28 Days Later'];
     const nextState = setEntries(state, entries);
     t.is( 
-        JSON.stringify(nextState),
-        JSON.stringify(Map({entries: List.of('Trainspotting', '28 Days Later')}))
+        nextState.toJS,
+        Map({entries: List.of('Trainspotting', '28 Days Later')}).toJS
     )
 });
 
 test ( 'Application logic : next : it takes the next two entries for voting', t => {
     const state = Map({entries: List.of('Trainspotting','28 Days Later', 'Sunshine')});
     const nextState = next(state);
-    t.is(
-        JSON.stringify(nextState),
-        JSON.stringify(
+    t.true(
+        nextState.equals(
             Map({ 
                 entries: List.of('Sunshine'),
                 vote: Map({pair: List.of('Trainspotting','28 Days Later')})
@@ -46,16 +45,15 @@ test( 'Application logic : next : puts winner of current vote back in entries', 
         entries: List.of('Sunshine', 'Millions', '127 Hours')
     });
     const nextState = next(state);
-    t.deepEqual(
-        JSON.stringify(
+    t.true(
+        nextState.equals(
             Map({
                 vote: Map({
                     pair: List.of('Sunshine', 'Millions')
                 }),
                 entries: List.of('127 Hours', 'Trainspotting'),
             })
-        ),
-        JSON.stringify(nextState)
+        )
     );
 });
 
@@ -71,9 +69,8 @@ test('Application logic : next : marks winner when just one entry left', t => {
         entries: List()
     });
     const nextState = next(state);
-    t.is(
-        JSON.stringify(nextState),
-        JSON.stringify(
+    t.true(
+        nextState.equals(
             Map({winner: 'Trainspotting'})
         )
     )
@@ -86,9 +83,9 @@ test( 'Application logic : vote : create a tally for the vote entry', t => {
         }),
     })
     const nextState = vote(state, 'Trainspotting');
-    t.is(
-        JSON.stringify(nextState),
-        JSON.stringify(Map({
+    t.true(
+        nextState.equals(
+        Map({
             vote: Map({
                 pair: List.of('Trainspotting','28 Days Later'),
                 tally: Map({
@@ -111,9 +108,8 @@ test ( 'Application login : vote : adds to existing tally for the vote entry', t
     });
     const nextState = vote(state, 'Trainspotting')
    
-    t.is(
-        JSON.stringify(nextState),
-        JSON.stringify(
+    t.true(
+        nextState.equals(
             Map({
                 vote: Map({
                     pair: List.of('Trainspotting','28 Days Later'),
@@ -124,5 +120,5 @@ test ( 'Application login : vote : adds to existing tally for the vote entry', t
                 }),
             })
         )
-    )
+    );
 });

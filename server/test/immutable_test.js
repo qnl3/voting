@@ -10,8 +10,8 @@ test('functional state processing', t => {
     let state = 42;
     let nextState = increment(state);
 
-    t.is(nextState, 43)
-    t.is(state, 42)
+    t.is(nextState, 43);
+    t.is(state, 42);
 })
 
 test('Immutable list', t => {
@@ -23,15 +23,15 @@ test('Immutable list', t => {
     let state = List.of('Trainspotting', '28 Days Later');
     let nextState = addMovie(state, 'Sunshine');
 
-    t.deepEqual(nextState.toArray() ,  List.of(
+    t.true(nextState.equals(List.of(
         'Trainspotting',
         '28 Days Later',
         'Sunshine'
-    ).toArray());
-    t.deepEqual(state.toString(), List.of(
+    )));
+    t.true(state.equals(List.of(
         'Trainspotting', 
         '28 Days Later'
-    ).toString());
+    )));
 })
 
 test("Immutable tree", t => {
@@ -44,10 +44,8 @@ test("Immutable tree", t => {
         movies: List.of('Trainspotting', '28 Days Later')
     });
     let nextState = addMovie(state, 'Sunshine');
-    t.is(
-        JSON.stringify(state), 
-        JSON.stringify(Map({movies: List.of('Trainspotting','28 Days Later')})))
-    t.is(
-        JSON.stringify(nextState), 
-        JSON.stringify(Map({movies: List.of('Trainspotting','28 Days Later', 'Sunshine')})))
+    t.true(
+        state.equals( 
+        Map({movies: List.of('Trainspotting','28 Days Later')})))
+    t.true(nextState.equals(Map({movies: List.of('Trainspotting','28 Days Later', 'Sunshine')})))
 })

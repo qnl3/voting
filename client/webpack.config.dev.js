@@ -17,7 +17,10 @@ const config = {
       {
           test: /\.jsx?$/,
           exclude: /node_modules/,
-          loader: 'react-hot!babel'
+          loader: "babel-loader",
+          query: {
+            presets: ['@ava/stage-4', 'react', 'es2015']
+          }
       }
     ]
 

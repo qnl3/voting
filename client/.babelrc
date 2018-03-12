@@ -1,7 +1,6 @@
 { 
     "presets": [
-        ["env", {
-            "modules": false
-        }]
+        "@ava/stage-4",
+        "react-hot-loader/babel"
     ]
 }
