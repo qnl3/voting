@@ -1,16 +1,15 @@
 import React from 'react';
 
-export default React.createClass({
-  getPair: function() {
-    return this.props.pair || [];
-  },
-  render: function() {
+class Voting extends React.Component {
+  render() {
     return <div className="voting">
-      {this.getPair().map(entry =>
+      {this.props.pair.map(entry =>
         <button key={entry}>
           <h1>{entry}</h1>
         </button>
       )}
     </div>;
   }
-});
+};
+
+export default Voting;
